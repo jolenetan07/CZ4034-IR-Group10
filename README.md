@@ -25,8 +25,8 @@ Repo of CZ4034 IR Group10 Project
 5. svm_classifier.ipynb
 6. decisiontree_classifier.ipynb
 7. naivebayes_classifier.ipynb
-8. PENDING lstm
-9. PENDING bert
+8. lstm_classifier.ipynb
+9. bert_classifier.ipynb
 10. ***results folder***
 
 ## Datasets
