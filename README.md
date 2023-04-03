@@ -25,9 +25,11 @@ Repo of CZ4034 IR Group10 Project
 5. svm_classifier.ipynb
 6. decisiontree_classifier.ipynb
 7. naivebayes_classifier.ipynb
-8. lstm_classifier.ipynb
-9. bert_classifier.ipynb
-10. ***results folder***
+8. majority_voting.ipynb
+9. lstm_classifier.ipynb
+10. bert_classifier.ipynb
+11. final_results.csv
+
 
 ## Datasets
 1. label_dataset_final.csv
