@@ -35,12 +35,13 @@ Repo of CZ4034 IR Group10 Project
 11. final_results.csv
 
 ## User Interface
-`cd ui`
-`python3 -m venv env`
-`source env/bin/activate` (mac) or `env\Scripts\activate` (windows)
-`pip install -r requirements.txt`
-`pip install streamlit`
-`streamlit run hello.py`
+**How To Run**
+* `cd ui`
+* `python3 -m venv env`
+* `source env/bin/activate` (mac) or `env\Scripts\activate` (windows)
+* `pip install -r requirements.txt`
+* `pip install streamlit`
+* `streamlit run hello.py`
 
 ## Datasets
 1. label_dataset_final.csv
