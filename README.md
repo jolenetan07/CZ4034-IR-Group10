@@ -45,6 +45,12 @@ __How To Run__
 * `pip install streamlit`
 * `streamlit run hello.py`
 
+__TODO__
+* put back lemmatizer
+* remove debugging stuff `st.write()`
+* remove dummy pages `hello.py` and `1_plot.py`
+* integrate with indexing
+
 ## Datasets
 **'datasets' folder**
 1. label_dataset_final.csv
