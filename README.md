@@ -46,6 +46,7 @@ __How To Run__
 * `streamlit run hello.py`
 
 ## Datasets
+**'datasets' folder**
 1. label_dataset_final.csv
 2. full_dataset_final.csv
 3. train_aug.csv
