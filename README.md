@@ -4,6 +4,7 @@ Repo of CZ4034 IR Group10 Project
 ## Data Collection
 **'1_crawling' folder**
 1. scrape_tweets.ipynb
+2. explore_data.ipynb
 
 ## Data Preprocessing
 **'2_preprocesing' folder**
@@ -15,6 +16,9 @@ Repo of CZ4034 IR Group10 Project
 **'3_augmentation' folder**
 1. augmentation_experiments.ipynb
 2. augment_train.ipynb
+
+## Indexing
+
 
 ## Sentiment Analysis
 **'4_classification" folder**
@@ -29,6 +33,8 @@ Repo of CZ4034 IR Group10 Project
 9. lstm_classifier.ipynb
 10. bert_classifier.ipynb
 11. final_results.csv
+
+## User Interface
 
 
 ## Datasets
