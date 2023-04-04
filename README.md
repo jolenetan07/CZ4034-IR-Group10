@@ -18,10 +18,11 @@ Repo of CZ4034 IR Group10 Project
 2. augment_train.ipynb
 
 ## Indexing
+**'4_indexing' folder**
 
 
 ## Sentiment Analysis
-**'4_classification" folder**
+**'5_classification" folder**
 1. unsupervised_classifiers.ipynb
 2. xgboost_classifier.ipynb
 3. lightgbm_classifier.ipynb
@@ -35,7 +36,8 @@ Repo of CZ4034 IR Group10 Project
 11. final_results.csv
 
 ## User Interface
-**How To Run**
+**'6_ui" folder**
+__How To Run__
 * `cd ui`
 * `python3 -m venv env`
 * `source env/bin/activate` (mac) or `env\Scripts\activate` (windows)
