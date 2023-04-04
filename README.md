@@ -50,6 +50,7 @@ __TODO__
 * remove debugging stuff `st.write()`
 * remove dummy pages `hello.py` and `1_plot.py`
 * integrate with indexing
+* update `requirements.txt`
 
 ## Datasets
 **'datasets' folder**
