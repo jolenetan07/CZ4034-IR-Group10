@@ -22,6 +22,7 @@ markdown-it-py==2.1.0
 MarkupSafe==2.1.2
 mdurl==0.1.2
 numpy==1.24.1
+nltk==3.8.1
 packaging==23.0
 pandas==1.5.3
 Pillow==9.4.0
@@ -54,3 +55,4 @@ urllib3==1.26.14
 validators==0.20.0
 watchdog==2.2.1
 zipp==3.11.0
+langdetect==1.0.9

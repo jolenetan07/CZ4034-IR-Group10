@@ -38,12 +38,15 @@ Repo of CZ4034 IR Group10 Project
 ## User Interface
 **'6_ui" folder**
 __How To Run__
-* `cd ui`
-* `python3 -m venv env`
+* `cd 6_ui`
+* `python3 -m venv env` (mac) or `python -m venv env` (windows)
 * `source env/bin/activate` (mac) or `env\Scripts\activate` (windows)
 * `pip install -r requirements.txt`
 * `pip install streamlit`
 * `streamlit run hello.py`
+
+__How deactivate virtual environment__
+* `deactivate`
 
 __TODO__
 * put back lemmatizer

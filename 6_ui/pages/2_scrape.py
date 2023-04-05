@@ -5,6 +5,7 @@ import datetime
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 from langdetect import detect
 import re
 
@@ -27,19 +28,17 @@ def preprocess(tweets_df):
     like_data_raw = tweets_df['LikeCount'].values
 
     text_data = []
-    en_count = 0
-
     timestamp_data = []
     likes_data = []
     index = 0
 
+    # remove non english words
     for text in text_data_raw:
         if text != '':
             try:
                 language = detect(text)
 
                 if language == 'en':
-                    en_count = en_count + 1
                     text_data.append(text)
                     timestamp_data.append(timestamp_data_raw[index])
                     likes_data.append(like_data_raw[index])
@@ -54,59 +53,47 @@ def preprocess(tweets_df):
         'LikeCount': likes_data
         })
 
-    clean_df = clean_df.drop_duplicates(keep='first')
-
-    def clean_urls(review):
-        review = review.split()
-        review = ' '.join([word for word in review if not re.match('^http', word)])
-        return review
-
-    def clean_text(text):
-        text = str(text)
-        text = re.sub(r'(\w)\1{2,}', r'\1', text)
-        text = re.sub(r'[^a-zA-Z0-9 ]+', ' ', text)
-        text = re.sub(r'http\S+', ' ', text)
-        text = re.sub(r'https?:\/\/.*[\r\n]*', '', text)
-        text = re.sub(r'^RT[\s]+', '', text)
-        text = re.sub(r'pic.twitter\S+', ' ', text)
-        text = re.sub(r'#', '', text)
-        text = re.sub(r'@\w+', '', text)
-        text = text.lower()
-
-        return text
-
     stop_words = set(stopwords.words('english'))
     stop_words.remove('not') 
-    # lemmatizer = WordNetLemmatizer()
+    lemmatizer = WordNetLemmatizer()
 
     def data_preprocessing(review):
-        
-    # data cleaning
+        # remove urls
+        review = review.split()
+        review = ' '.join([word for word in review if not re.match('^http', word)])
+
+        # data cleaning
         review = re.sub(re.compile('<.*?>'), '', review) #removing html tags
         review =  re.sub('[^A-Za-z0-9]+', ' ', review) #taking only words
-    
-    # lowercase
+        review = re.sub(r'(\w)\1{2,}', r'\1', review)
+        review = re.sub(r'[^a-zA-Z0-9 ]+', ' ', review)
+        review = re.sub(r'http\S+', ' ', review)
+        review = re.sub(r'https?:\/\/.*[\r\n]*', '', review)
+        review = re.sub(r'^RT[\s]+', '', review)
+        review = re.sub(r'pic.twitter\S+', ' ', review)
+        review = re.sub(r'#', '', review)
+        review = re.sub(r'@\w+', '', review)
+
+        # lowercase
         review = review.lower()
     
-    # tokenization
+        # tokenization
         tokens = nltk.word_tokenize(review) # converts review to tokens
     
-    # stop_words removal
+        # stop_words removal
         review = [word for word in tokens if word not in stop_words] #removing stop words
     
-    # lemmatization
-        # review = [lemmatizer.lemmatize(word) for word in review]
+        # lemmatization
+        review = [lemmatizer.lemmatize(word) for word in review]
     
-    # join words in preprocessed review
+        # join words in preprocessed review
         review = ' '.join(review)
         return review
 
-    clean_df['Clean Text'] = clean_df['Text'].apply(clean_urls).apply(clean_text)
-
-    clean_df['Clean Text'] = clean_df['Clean Text'].apply(lambda review: data_preprocessing(review))
+    clean_df['Clean Text'] = clean_df['Text'].apply(lambda review: data_preprocessing(review))
     
-    st.write(len(clean_df))
-    st.write(len(tweets_df))
+    # drop duplicates
+    clean_df = clean_df.drop_duplicates(keep='first')
 
     return clean_df
 
@@ -125,6 +112,7 @@ if word:
                     break            
                 tweets_list.append([ tweet.date, tweet.content ])
             tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text'])
+        # preprocess data
         tweets_df = preprocess(tweets_df)
     except Exception as e:
         st.error(e)
