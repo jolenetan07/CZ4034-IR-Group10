@@ -3,11 +3,16 @@ import pandas as pd
 import streamlit as st
 import datetime
 import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from langdetect import detect
 import re
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pickle
 
 st.set_page_config(page_title="Crawling", page_icon="🕷️")
 
@@ -97,6 +102,24 @@ def preprocess(tweets_df):
 
     return clean_df
 
+# Classify
+def classify(df):
+    
+    with open('C:/Users/jolen/Documents/GitHub/CZ4034-IR-Group10/6_ui/pages/vectorizer.pkl', 'rb') as f:
+        vectorizer = pickle.load(f)
+    
+    X_test = df['Clean Text']
+    X_vectorized = vectorizer.transform(X_test)
+
+
+    with open('C:/Users/jolen/Documents/GitHub/CZ4034-IR-Group10/6_ui/pages/model.pkl', 'rb') as f:
+        model = pickle.load(f)
+
+    predictions = model.predict(X_vectorized)
+    df['Polarity'] = predictions
+
+    return df
+
 # SCRAPE DATA 
 if word:
     try:
@@ -114,6 +137,10 @@ if word:
             tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text'])
         # preprocess data
         tweets_df = preprocess(tweets_df)
+        # classify data
+        tweets_df = classify(tweets_df)
+        # append name
+        tweets_df['NFT'] = word
     except Exception as e:
         st.error(e)
         st.stop()

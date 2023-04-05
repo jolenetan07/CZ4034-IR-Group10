@@ -56,3 +56,9 @@ validators==0.20.0
 watchdog==2.2.1
 zipp==3.11.0
 langdetect==1.0.9
+
+sklearn-pandas==2.2.0
+pickleshare==0.7.5
+cloudpickle==2.2.1
+jsonpickle==3.0.1
+xgboost==1.7.5
