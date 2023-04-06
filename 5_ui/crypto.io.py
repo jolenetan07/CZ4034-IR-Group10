@@ -5,8 +5,6 @@ import plotly.express as px
 import time
 
 st.set_page_config(layout="wide")
-hosts = ["http://localhost:9200"]
-#es = Elasticsearch(hosts=hosts)
 es = Elasticsearch(['http://localhost:9200'], http_auth=('jolene', 'jolene'))
 index_name = "ir_assignment_try"
 
@@ -216,7 +214,7 @@ def plot_timeseries(df,nft_name):
     return px.line(nft_df, x='Datetime', y="Polarity",title ="Average Sentiment Score")
 
 # ======================================= MISC STREMALIT ====================================================================================
-def create_streamlit_form(html_string):
+def create_streamlit_form(html_string, df = df):
     st.markdown('**Search filters**')
     search_result_number = st.slider('Number of search results', min_value=1, max_value=50,value = 10)
     spec_nft = st.multiselect('Specific NFT(s)', ['Azuki',
