@@ -62,3 +62,6 @@ pickleshare==0.7.5
 cloudpickle==2.2.1
 jsonpickle==3.0.1
 xgboost==1.7.5
+
+plotly==5.14.1
+elasticsearch==8.6.2

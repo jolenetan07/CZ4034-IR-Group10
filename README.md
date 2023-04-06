@@ -43,7 +43,7 @@ __How To Run__
 * `source env/bin/activate` (mac) or `env\Scripts\activate` (windows)
 * `pip install -r requirements.txt`
 * `pip install streamlit`
-* `streamlit run hello.py`
+* `streamlit run crypto_io.py`
 
 __How deactivate virtual environment__
 * `deactivate`

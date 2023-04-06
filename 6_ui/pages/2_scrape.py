@@ -10,14 +10,20 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from langdetect import detect
 import re
+import os
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
 
-st.set_page_config(page_title="Crawling", page_icon="🕷️")
+st.set_page_config(page_title="Crawling")
 
 tweets_df = pd.DataFrame()
-st.write("# Twitter Scraper")
+st.write("# :spider: Twitter Scraper ")
+html_string = "<br>"
+st.markdown(html_string, unsafe_allow_html=True)
+st.markdown('This page returns tweets and its polarity according to your filters.')
+
+st.markdown(html_string, unsafe_allow_html=True)
 option = st.selectbox('Search data via...',('Keyword', 'Hashtag'))
 word = st.text_input('Please enter a '+option, 'Query')
 start = st.date_input("Select start date", datetime.date(2022, 1, 1),key='d1')
@@ -53,9 +59,9 @@ def preprocess(tweets_df):
                 index = index + 1
 
     clean_df = pd.DataFrame(
-        {'Date': timestamp_data,
-        'Text': text_data,
-        'LikeCount': likes_data
+        {'Datetime': timestamp_data,
+        'Likes': likes_data,
+        'Text': text_data
         })
 
     stop_words = set(stopwords.words('english'))
@@ -104,19 +110,21 @@ def preprocess(tweets_df):
 
 # Classify
 def classify(df):
-    
-    with open('C:/Users/jolen/Documents/GitHub/CZ4034-IR-Group10/6_ui/pages/vectorizer.pkl', 'rb') as f:
+    script_dir = os.path.dirname(__file__)
+    with open(os.path.join(script_dir, './vectorizer.pkl'), 'rb') as f:
         vectorizer = pickle.load(f)
     
     X_test = df['Clean Text']
     X_vectorized = vectorizer.transform(X_test)
 
 
-    with open('C:/Users/jolen/Documents/GitHub/CZ4034-IR-Group10/6_ui/pages/model.pkl', 'rb') as f:
+    with open(os.path.join(script_dir, './model.pkl'), 'rb') as f:
         model = pickle.load(f)
 
     predictions = model.predict(X_vectorized)
     df['Polarity'] = predictions
+    df['Polarity'] = df['Polarity'].replace(0,-1)
+    df['Polarity'] = df['Polarity'].replace(2,0)
 
     return df
 
@@ -133,14 +141,16 @@ if word:
             for i,tweet in enumerate(sntwitter.TwitterHashtagScraper(f'{word} lang:en since:{start} until:{end}').get_items()):
                 if i>tweet_c-1:
                     break            
-                tweets_list.append([ tweet.date, tweet.content ])
-            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text'])
+                tweets_list.append([ tweet.date, tweet.rawContent,tweet.likeCount ])
+            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
         # preprocess data
         tweets_df = preprocess(tweets_df)
         # classify data
         tweets_df = classify(tweets_df)
         # append name
         tweets_df['NFT'] = word
+        # re-arrange columns
+        tweets_df = tweets_df[['Datetime', 'Likes', 'NFT', 'Text', 'Clean Text', 'Polarity']]
     except Exception as e:
         st.error(e)
         st.stop()
@@ -162,29 +172,26 @@ else:
 #     x=st.button('Show Tweets',key=1)
 
 # DOWNLOAD AS CSV
-# @st.cache # IMPORTANT: Cache the conversion to prevent computation on every rerun
-# def convert_df(df):    
-#     return df.to_csv().encode('utf-8')
+@st.cache # IMPORTANT: Cache the conversion to prevent computation on every rerun
+def convert_df(df):    
+    return df.to_csv().encode('utf-8')
 
 if not tweets_df.empty:
     col1, col2, col3 = st.columns(3)
-    # with col1:
-    #     csv = convert_df(tweets_df) # CSV
-    #     c=st.download_button(label="Download data as CSV",data=csv,file_name='Twitter_data.csv',mime='text/csv',)        
-    # with col2:    # JSON
-    #     json_string = tweets_df.to_json(orient ='records')
-    #     j=st.download_button(label="Download data as JSON",file_name="Twitter_data.json",mime="application/json",data=json_string,)
+    with col1:
+        csv = convert_df(tweets_df) # CSV
+        c=st.download_button(label="Download as CSV",data=csv,file_name='Twitter_data.csv',mime='text/csv',)        
+    with col2:    # JSON
+        json_string = tweets_df.to_json(orient ='records')
+        j=st.download_button(label="Download as JSON",file_name="Twitter_data.json",mime="application/json",data=json_string,)
 
-    with col2: # SHOW
+    with col3: # SHOW
         y=st.button('Display Tweets',key=2)
 
-# if c:
-#     st.success("The Scraped Data is Downloaded as .CSV file:",icon="✅")  
-# if j:
-#     st.success("The Scraped Data is Downloaded as .JSON file",icon="✅")     
-# if x: # DISPLAY
-#     st.success("The Scraped Data is:",icon="✅")
-#     st.write(tweets_df)
+if c:
+    st.success("The Scraped Data is Downloaded as .CSV file:",icon="✅")  
+if j:
+    st.success("The Scraped Data is Downloaded as .JSON file",icon="✅")     
 if y: # DISPLAY
     st.balloons()
     st.success("Tweets Scraped Successfully:",icon="✅")
