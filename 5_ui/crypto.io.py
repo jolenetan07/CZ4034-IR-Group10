@@ -15,7 +15,7 @@ df = df.drop('Quarter', axis=1)
 df['NFT'] = df['NFT'].astype(str)
 df['Clean'] = df['Clean'].astype(str)
 df['Polarity'] = df['Polarity'].astype(str)
-df['Datetime'] = pd.to_datetime(df['Datetime'])
+df['Datetime'] = pd.to_datetime(df['Datetime'], format='%d/%m/%y')
 #st.write(df.columns)
 
 def create_index(es = es, index_name = "ir_assignment_try", df = df):

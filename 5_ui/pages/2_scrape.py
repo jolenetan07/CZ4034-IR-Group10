@@ -164,6 +164,11 @@ if word:
         tweets_df['NFT'] = word
         # re-arrange columns
         tweets_df = tweets_df[['Datetime', 'Likes', 'NFT', 'Text', 'Clean', 'Polarity']]
+        # specify data types
+        tweets_df['NFT'] = tweets_df['NFT'].astype(str)
+        tweets_df['Clean'] = tweets_df['Clean'].astype(str)
+        tweets_df['Polarity'] = tweets_df['Polarity'].astype(str)
+        tweets_df['Datetime'] = pd.to_datetime(tweets_df['Datetime'], format='%d/%m/%y')
         new_index(es, index_name, tweets_df)
     except Exception as e:
         st.error(e)

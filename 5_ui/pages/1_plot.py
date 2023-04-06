@@ -34,20 +34,41 @@ st.set_page_config(page_title="Classification Graphs", page_icon="📈")
 # # rerun.
 # st.button("Re-run")
 
-
-
-df = pd.read_csv("final_data.csv")
+df = pd.read_csv("./assets/final_data.csv")
 df['NFT'] = df['NFT'].astype(str)
 df['Clean'] = df['Clean'].astype(str)
 df['Polarity'] = df['Polarity'].astype(str)
-df['Datetime'] = pd.to_datetime(df['Datetime'])
+df['Datetime'] = pd.to_datetime(df['Datetime'], format='%d/%m/%y')
 
 # ======================================= GRAPH PLOTTING ====================================================================================
 def query_db(spec_nft, search_query, search_result_number):
-    string = "Showing Graphs for: "
-    for nft in spec_nft:
-        string += f" {nft}" if nft == spec_nft[-1] else f" {nft},"
-    st.write(string)
+    if len(spec_nft) != 0:
+    
+        string = "Showing Graphs for: "
+        st.write(string)
+        for nft in spec_nft:
+            if nft == 'Azuki':
+                release = 'January 2022'  
+            elif nft == 'Bored Ape Yacht Club':
+                release = 'April  2021'       
+            elif nft == 'CloneX':
+                release = 'November 2021'  
+            elif nft == 'CryptoPunks':
+                release = 'June 2017'  
+            elif nft == 'Meebits':
+                release = 'November 2021'  
+            elif nft == 'MekaVerse':
+                release = 'October 2021'   
+            elif nft == 'Mutant Ape Yacht Club':
+                release = 'August 2021'   
+            elif nft == 'Phanta Bear':
+                release = 'January 2022'  
+            elif nft == 'Pixelmon':
+                release = 'February  2022'
+            elif nft == 'The Potatoz':
+                release = 'July  2022' 
+            st.info(str(nft) + ', Release date: ' + release)
+        
     fig1 = plot_overall(df,spec_nft)
     st.plotly_chart(fig1)
     fig2 = plot_timeseries(df,spec_nft)
@@ -61,7 +82,7 @@ def plot_overall(df,nft_name):
         '0' : 'blue',
         '1' : 'green'
         })
-    fig.update_layout(
+    fig.update_layout(xaxis_title='',
                   xaxis = dict(
                     tickmode='array', #change 1
                     tickvals = ['neg','neu','pos'], #change 2
@@ -71,12 +92,16 @@ def plot_overall(df,nft_name):
 
 def plot_timeseries(df,nft_name):
     nft_df = df[df["NFT"].isin(nft_name)]
-    nft_df['Datetime'] = pd.to_datetime(nft_df['Datetime'])
+    #nft_df['Datetime'] = pd.to_datetime(nft_df['Datetime'])
+    min_date = nft_df['Datetime'].min()
+    max_date = nft_df['Datetime'].max()
     nft_df['Polarity'] = pd.to_numeric(nft_df['Polarity'])
     nft_df = nft_df.sort_values("Datetime").reset_index(drop=True)
     grouped_data = nft_df.groupby(['NFT', pd.Grouper(key='Datetime', freq='M')])
     nft_df = grouped_data['Polarity'].mean().reset_index()
-    return px.line(nft_df, x='Datetime', y="Polarity",title ="Average Sentiment Score", color='NFT')
+    fig = px.line(nft_df, x='Datetime', y="Polarity",title ="Average Sentiment Score", color='NFT')
+    fig.update_layout(xaxis_range=[min_date, max_date])
+    return fig
 
 # ======================================= MISC STREMALIT ====================================================================================
 def create_streamlit_form(html_string):
