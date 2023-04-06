@@ -11,9 +11,9 @@ from nltk.stem import WordNetLemmatizer
 from langdetect import detect
 import re
 import os
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
+from elasticsearch import Elasticsearch
 
 st.set_page_config(page_title="Crawling")
 
@@ -30,6 +30,19 @@ start = st.date_input("Select start date", datetime.date(2022, 1, 1),key='d1')
 end = st.date_input("Select end date", datetime.date(2023, 1, 1),key='d2')
 tweet_c = st.slider('Select number of tweets', 0, 1000, 5)
 tweets_list = []
+
+# create index
+es = Elasticsearch(['http://localhost:9200'], http_auth=('jolene', 'jolene'))
+index_name = "ir_assignment_try"
+
+def new_index(es, index_name, df):
+    # Define documents to be appended
+    docs = df.to_dict(orient="records")
+    # Append documents to existing index
+    for i, doc in enumerate(docs):
+        es.index(index=index_name, id=i+1, body=doc)
+    print("done creating new index")
+
 
 # PREPROCESS
 def preprocess(tweets_df):
@@ -151,6 +164,7 @@ if word:
         tweets_df['NFT'] = word
         # re-arrange columns
         tweets_df = tweets_df[['Datetime', 'Likes', 'NFT', 'Text', 'Clean', 'Polarity']]
+        new_index(es, index_name, tweets_df)
     except Exception as e:
         st.error(e)
         st.stop()
