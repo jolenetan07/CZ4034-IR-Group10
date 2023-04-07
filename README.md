@@ -75,6 +75,8 @@ devs:
 * from project directory, open Command Prompt, `cd 5_ui`
 * `env\Scripts\activate`
 * `streamlit run crypto.io.py`
+* from project directory, in `crypto.io.py` change line 8 to `es = Elasticsearch(['http://localhost:9200'], http_auth=('<username>', '<password>'))`
+* from `pages\2_scrape.py` change line 35 to `es = Elasticsearch(['http://localhost:9200'], http_auth=('<username>', '<password>'))`
 * `deactivate` to deactivate the Python virtual environment  
 
 ## Datasets

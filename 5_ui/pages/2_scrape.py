@@ -35,7 +35,7 @@ tweet_c = st.slider('Select number of tweets', 0, 1000, 5)
 tweets_list = []
 
 # create index
-es = Elasticsearch(['http://localhost:9200'])
+es = Elasticsearch(['http://localhost:9200'], http_auth=('jolene', 'jolene'))
 index_name = "ir_assignment_try"
 
 def new_index(es, index_name, df):
