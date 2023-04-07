@@ -34,7 +34,7 @@ st.set_page_config(page_title="Classification Graphs", page_icon="📈")
 # # rerun.
 # st.button("Re-run")
 
-df = pd.read_csv("./assets/final_data.csv")
+df = pd.read_csv("./assets/final_results.csv")
 df['NFT'] = df['NFT'].astype(str)
 df['Clean'] = df['Clean'].astype(str)
 df['Polarity'] = df['Polarity'].astype(str)

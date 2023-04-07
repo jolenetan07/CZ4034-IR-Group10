@@ -9,7 +9,7 @@ es = Elasticsearch(['http://localhost:9200'])
 index_name = "ir_assignment_try"
 
 # read data
-df = pd.read_csv("./assets/final_data.csv")
+df = pd.read_csv("./assets/final_results.csv")
 df = df.drop('Unnamed: 0', axis=1)
 df = df.drop('Quarter', axis=1)
 df['NFT'] = df['NFT'].astype(str)

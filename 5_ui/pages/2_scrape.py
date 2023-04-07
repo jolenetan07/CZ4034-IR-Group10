@@ -35,7 +35,7 @@ tweet_c = st.slider('Select number of tweets', 0, 1000, 5)
 tweets_list = []
 
 # create index
-es = Elasticsearch(['http://localhost:9200'], http_auth=('jolene', 'jolene'))
+es = Elasticsearch(['http://localhost:9200'])
 index_name = "ir_assignment_try"
 
 def new_index(es, index_name, df):
@@ -125,6 +125,7 @@ def preprocess(tweets_df):
 
 # Classify
 def classify(df):
+    #print(script_dir)
     with open("assets/vectorizer.pkl", 'rb') as f:
         vectorizer = pickle.load(f)
     
@@ -134,8 +135,6 @@ def classify(df):
 
     with open("assets/model.pkl", 'rb') as f:
         model = pickle.load(f)
-        print(model)
-
 
     predictions = model.predict(X_vectorized)
     df['Polarity'] = predictions
@@ -152,12 +151,13 @@ if word:
                 if i>tweet_c-1:
                     break
                 tweets_list.append([ tweet.date, tweet.rawContent,tweet.likeCount ])
+            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
         else:
             for i,tweet in enumerate(sntwitter.TwitterHashtagScraper(f'{word} lang:en since:{start} until:{end}').get_items()):
                 if i>tweet_c-1:
                     break            
                 tweets_list.append([ tweet.date, tweet.rawContent,tweet.likeCount ])
-        tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
+            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
         # preprocess data
         tweets_df = preprocess(tweets_df)
         # classify data
