@@ -31,7 +31,7 @@ Repo of **Crypto.io** - A *NFT-related* Information Retrieval Project
 10. bert_classifier.ipynb  
 
 ## User Interface
-**'6_ui' folder**  
+**'5_ui' folder**  
 *How To Install Elasticsearch*
 * download and unzip `elasticsearch-8.7.0`
 * in `/config/elasticsearch.yml` change lines 98 and 103 to `false`
