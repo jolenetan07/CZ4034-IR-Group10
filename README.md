@@ -72,18 +72,10 @@ devs:
 
 *How To Run*
 * open Command Prompt, `elasticsearch`
-* from project directory, in `crypto.io.py` change line 8 to `es = Elasticsearch(['http://localhost:9200'], http_auth=('<username>', '<password>'))`
-* from `pages\2_scrape.py` change line 35 to `es = Elasticsearch(['http://localhost:9200'], http_auth=('<username>', '<password>'))`
 * from project directory, open Command Prompt, `cd 5_ui`
 * `env\Scripts\activate`
 * `streamlit run crypto.io.py`
 * `deactivate` to deactivate the Python virtual environment  
-
-__TODO__
-* remove dummy pages `hello.py` and `1_plot.py`
-* integrate with indexing
-* update `requirements.txt`
-* move final_data.csv to datasets folder or create an assets folder to store with model and vectorizer  
 
 ## Datasets
 **'datasets' folder**

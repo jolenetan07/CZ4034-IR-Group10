@@ -1,0 +1,76 @@
+Query: “azuki best” + NFT: Azuki
+
+2023-04-07 16:40:07.528 POST http://localhost:9200/ir_assignment_try/_search [status:200 duration:0.028s]
+                  Datetime  Likes                                               Text Polarity
+NFT
+Azuki  2022-06-28T00:00:00    124  holding 2 Azuki and 4 Beanz, why do I think @A...        1
+Azuki  2022-12-30T00:00:00    119  No matter what you say @AzukiOfficial is the c...        1
+Azuki  2022-03-30T00:00:00      2  Best #NFT to buy according to @B2Community\n\n...        1
+Azuki  2022-12-30T00:00:00      0  Between Dec. 26 and 27, Azuki was the best-per...        1
+Azuki  2022-03-30T00:00:00      7  Fading Azuki red beans because I was married t...       -1
+Azuki  2023-02-13T00:00:00      0  Both cool! Azuki NFT are the coolest!\n#Azuki\...        1
+Azuki  2022-09-28T00:00:00      0  The best part about being in azuki is that the...        1
+Azuki  2022-09-28T00:00:00      6  The best part about being in azuki is that the...        1
+Azuki  2022-06-28T00:00:00      4  Which of these memes said it best? #degods #ba...        1
+Azuki  2022-12-30T00:00:00      0  Bean #13475 swapped on NFT Trader #BEANZ #Azuk...        1 
+
+
+Query: “nft good projects” + NFT: Bored Ape Yacht Club +  NFT: CloneX
+
+2023-04-07 16:39:47.135 POST http://localhost:9200/ir_assignment_try/_search [status:200 duration:0.018s]
+                                 Datetime  Likes                                               Text Polarity
+NFT
+Bored Ape Yacht Club  2021-09-18T00:00:00      5  Looking to buy another NFT - I need good proje...        1
+CloneX                2022-06-27T00:00:00    173  In the NFT space we are the people who make th...       -1
+CloneX                2022-06-23T00:00:00    103  My Top 5 teams for Avatar NFT projects..\n\n1....        1
+CloneX                2022-09-24T00:00:00      2  CloneX TW is so connected and open-minded to c...        1
+CloneX                2023-10-02T00:00:00      1  What’s going on with CloneX good entry?\n#NFTC...        1
+Bored Ape Yacht Club  2021-06-19T00:00:00    211  Bored Ape Yacht Club has successfully transiti...        1
+CloneX                2022-09-12T00:00:00      0  Oh my God ! so cool i can not wait to get mine...        1
+CloneX                2022-12-24T00:00:00      1  TOP 5 NFT Projects Update &amp; NFT News | Coo...        1
+CloneX                2022-09-20T00:00:00     99  Felt like I needed to diversify a bit in this ...        1
+CloneX                2023-06-02T00:00:00      2  Congratulations @Khalissman on flipping CloneX...        1
+
+
+Query: “Jaychou” + 3 search results
+
+2023-04-07 16:41:29.591 POST http://localhost:9200/ir_assignment_try/_search [status:200 duration:0.028s]
+                        Datetime  Likes                                               Text Polarity
+NFT
+Phanta Bear  2022-11-01T00:00:00      0  台湾のアイコンJayChouのPhantaBearNFTがBoredApe YachtClu...        0
+Phanta Bear  2022-01-13T00:00:00      1  Phanta Bear 暴跌暴漲關鍵五分鐘 — 瘋狂回顧/心得 \nhttps://t.co...        0
+Phanta Bear  2022-04-02T00:00:00      0  Woohoo!!! I am now a Phanta Bear owner!! Jay C...        1
+
+
+Query: “ ” + NFT: Meebits
+
+2023-04-07 16:42:29.623 POST http://localhost:9200/ir_assignment_try/_search [status:200 duration:0.008s]
+                    Datetime  Likes                                               Text Polarity
+NFT
+Meebits  2023-02-13T00:00:00      0  Meebit #12900 bought for 3.09 WETH (4,573.57 U...        1
+Meebits  2023-02-13T00:00:00      0  Meebit #18044 bought for 2.88 ETH (4,245.36 US...        1
+Meebits  2023-02-13T00:00:00      1  Meebit #3408 bought for 2.90 WETH (4,305.12 US...        1
+Meebits  2023-02-13T00:00:00      1  Meebit #12957 bought for 4.00 ETH (5,924.68 US...        1
+Meebits  2023-02-13T00:00:00      0  Meebits Top5 Sales within 24H [ 07:01, Feb 13,...        1
+Meebits  2023-02-13T00:00:00    140  These are my current bags:\n1) 1x MAYC\n2) 27x...        1
+Meebits  2023-02-13T00:00:00      4  Meebits triple floor check! \n#OpenSea listing...        0
+Meebits  2023-02-13T00:00:00     50  Web 3 and NFT change our life\nNice to met Ape...        1
+Meebits  2023-02-13T00:00:00      2  🔥🔥🔥 Hot free mint alert 🔥🔥🔥\n\nProject: NFTBox...        1
+Meebits  2023-02-13T00:00:00      0  🐳 Top Whale SELLS🔻 (Last hour):\n\nAnimetas: 1...        1
+
+
+Query: “Cryptopunk” + NFT: Meebits
+
+2023-04-07 16:43:09.000 POST http://localhost:9200/ir_assignment_try/_search [status:200 duration:0.013s]
+                    Datetime  Likes                                               Text Polarity
+NFT
+Meebits  2022-12-21T00:00:00     14  My Top 3 NFT picks:\n\n1. CryptoPunks\n2. Auto...        1
+Meebits  2023-01-28T00:00:00     56  4 of the top 6 most profitable NFT trader wall...        1
+Meebits  2022-12-30T00:00:00      4  Here, Top 10 NFT sales of 2022\n(expect Yugala...        1
+Meebits  2022-12-12T00:00:00      6  NFT market Highlights:\nCollections like Meebi...        1
+Meebits  2023-04-02T00:00:00      0  Yuga Labs Obtains Cryptopunks and Meebits Bran...       -1
+Meebits  2023-04-02T00:00:00      0  Yuga Labs Obtains Cryptopunks and Meebits Bran...       -1
+Meebits  2023-01-22T00:00:00      9  NFT LIST🔑🪖\n#MutantApeYachtClub\n#BoredApeYach...        0
+Meebits  2023-01-19T00:00:00      5  🚨#BREAKING: #Mailchimp has📣announced that it w...       -1
+Meebits  2022-12-13T00:00:00     21  Our guys can’t wait to explore the @OthersideM...        0
+Meebits  2023-01-02T00:00:00      2  #YugaLabs have tweeted that they have faced so...       -1
