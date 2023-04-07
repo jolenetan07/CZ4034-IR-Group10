@@ -24,8 +24,11 @@ st.markdown(html_string, unsafe_allow_html=True)
 st.markdown('This page returns tweets and its polarity according to your filters.')
 
 st.markdown(html_string, unsafe_allow_html=True)
+
+st.session_state.visibility = "visible"
+st.session_state.disabled = False
 option = st.selectbox('Search data via...',('Keyword', 'Hashtag'))
-word = st.text_input('Please enter a '+option, 'Query')
+word = st.text_input('Please enter a '+option,  disabled=st.session_state.disabled, placeholder='Enter your query here')
 start = st.date_input("Select start date", datetime.date(2022, 1, 1),key='d1')
 end = st.date_input("Select end date", datetime.date(2023, 1, 1),key='d2')
 tweet_c = st.slider('Select number of tweets', 0, 1000, 5)
@@ -174,8 +177,8 @@ if word:
         st.error(e)
         st.stop()
 
-else:
-    st.warning(option,' cant be empty', icon="⚠️")
+# else:
+    # st.warning(option,' cant be empty', icon="⚠️")
 
 #SIDEBAR
 # with st.sidebar:   
@@ -194,7 +197,9 @@ else:
 @st.cache # IMPORTANT: Cache the conversion to prevent computation on every rerun
 def convert_df(df):    
     return df.to_csv().encode('utf-8')
-
+c = False
+j = False
+y = False
 if not tweets_df.empty:
     col1, col2, col3 = st.columns(3)
     with col1:
