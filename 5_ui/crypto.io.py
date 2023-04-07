@@ -5,7 +5,7 @@ import plotly.express as px
 import time
 
 st.set_page_config(layout="wide")
-es = Elasticsearch(['http://localhost:9200'], http_auth=('jolene', 'jolene'))
+es = Elasticsearch(['http://localhost:9200'])
 index_name = "ir_assignment_try"
 
 # read data

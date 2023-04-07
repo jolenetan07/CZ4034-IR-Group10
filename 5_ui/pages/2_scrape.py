@@ -125,17 +125,17 @@ def preprocess(tweets_df):
 
 # Classify
 def classify(df):
-    script_dir = os.path.dirname(__file__)
-    #print(script_dir)
-    with open(os.path.join(script_dir, "..\\assets\\vectorizer.pkl"), 'rb') as f:
+    with open("assets/vectorizer.pkl", 'rb') as f:
         vectorizer = pickle.load(f)
     
     X_test = df['Clean']
     X_vectorized = vectorizer.transform(X_test)
 
 
-    with open(os.path.join(script_dir, "..\\assets\\model.pkl"), 'rb') as f:
+    with open("assets/model.pkl", 'rb') as f:
         model = pickle.load(f)
+        print(model)
+
 
     predictions = model.predict(X_vectorized)
     df['Polarity'] = predictions
@@ -152,13 +152,12 @@ if word:
                 if i>tweet_c-1:
                     break
                 tweets_list.append([ tweet.date, tweet.rawContent,tweet.likeCount ])
-            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
         else:
             for i,tweet in enumerate(sntwitter.TwitterHashtagScraper(f'{word} lang:en since:{start} until:{end}').get_items()):
                 if i>tweet_c-1:
                     break            
                 tweets_list.append([ tweet.date, tweet.rawContent,tweet.likeCount ])
-            tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
+        tweets_df = pd.DataFrame(tweets_list, columns=['Date', 'Text', 'LikeCount'])
         # preprocess data
         tweets_df = preprocess(tweets_df)
         # classify data
